@@ -15,7 +15,6 @@ def generate_password():
     nr_symbols = random.randint(2, 4)
     nr_numbers = random.randint(2, 4)
 
-
     password_letters = [(random.choice(letters)) for _ in range(nr_letters)]
     password_symbols = [(random.choice(symbols)) for _ in range(nr_symbols)]
     password_numbers = [(random.choice(numbers)) for _ in range(nr_numbers)]
@@ -26,21 +25,10 @@ def generate_password():
 
     password = "".join(password_list)
 
-    '''password = ""
-    for char in password_list:
-      password += char'''
-
-    #print(f"Your password is: {password}")
     password_entry.insert(0, password)
-    pyperclip.copy(password)        #Copia en la contraseña en el portapapeles para
-                                    #que esté listo para pegarlo
+    pyperclip.copy(password)
+
 # ---------------------------- SAVE PASSWORD ------------------------------- #
-
-#archivo llamado "data.txt"
-# Amazon | dono@gmail.com | njndjna889dJ
-#Website | email          | password
-#delete function
-
 def save():
     website = website_entry.get()
     email = email_username_entry.get()
@@ -51,41 +39,6 @@ def save():
             "Password": password
         }
     }
-
-    #messagebox.showinfo(title="Title", message="Message")
-    '''is_ok =messagebox.askokcancel(title=website, message=f"These are the details entered: "
-                                                  f"\nEmail: {email}\nPassword: {password}\n"
-                                                  f"Is it ok to save?")'''
-
-    #messagebox.showerror(title="Ooops!", message="Please don't leave any fields empty!")
-
-    #if is_ok:
-    '''if is_ok == True and len(website_entry.get()) > 3 and len(password_entry.get()) > 5:
-        with open("data.txt", mode="a") as data_file:
-            data_file.write(f"{website} | {email} | {password}\n")
-            website_entry.delete(0, END)
-            #email_username_entry.delete(0, END)
-            password_entry.delete(0, END)'''
-
-    '''if len(website_entry.get()) < 3 and len(password_entry.get()) < 5:
-        messagebox.showerror(title="Ooops!", message="Please don't leave any fields empty! \nPassword and Website are not defined"
-                                                     "\nTry again")
-    elif len(website_entry.get()) < 3:
-        messagebox.showerror(title="Ooops!", message="Please don't leave any fields empty! \nWebsite it's not defined"
-                                                     "\nTry again")
-    elif len(password_entry.get()) < 5:
-        messagebox.showerror(title="Ooops!", message="Please don't leave any fields empty! \nPassword it's not defined"
-                                                     "\nTry again")
-    else:
-        is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: "
-                                                              f"\nEmail: {email}\nPassword: {password}\n"
-                                                              f"Is it ok to save?")
-        if is_ok == True and len(website_entry.get()) > 3 and len(password_entry.get()) > 5:
-            with open("data.txt", mode="a") as data_file:
-                data_file.write(f"{website} | {email} | {password}\n")
-                website_entry.delete(0, END)
-                # email_username_entry.delete(0, END)
-                password_entry.delete(0, END)'''
 
     if len(website) == 0 and len(password) == 0:
         messagebox.showerror(title="Ooops!",
@@ -100,25 +53,6 @@ def save():
                             message="Please don't leave any fields empty! \nPassword is not defined"
                                     "\nTry again")
     else:
-        '''try:
-            with open("data.json", mode="r") as data_file:
-                json.dump(new_data, data_file, indent=4)
-                #Reading old data
-                data = json.load(data_file)
-                #Updating old data with new data
-                data.update(new_data)
-            with open("data.json", mode="w") as data_file:
-                #Saving updated data
-                json.dump(data, data_file, indent=4)
-
-                website_entry.delete(0, END)
-                password_entry.delete(0, END)
-        except FileNotFoundError:
-            with open("data.json", mode="w") as data_file:
-                json.dump(new_data, data_file, indent=4)
-
-                website_entry.delete(0, END)
-                password_entry.delete(0, END)'''
         try:
             with open("data.json", mode="r") as data_file:
                 data = json.load(data_file)
@@ -137,29 +71,6 @@ def save():
 # ---------------------------- FIND PASSWORD ------------------------------- #
 def find_password():
     website = website_entry.get()
-    #My version:
-    '''if len(website) > 3:
-        try:
-            with open("data.json", mode="r") as data_file:
-                data = json.load(data_file)
-                email = data[website]["Email"]
-                password = data[website]["Password"]
-        except FileNotFoundError:
-            messagebox.showerror(title="Error",
-                                 message="No Data File Found")
-        except KeyError:
-            messagebox.showerror(title="Error",
-                                 message=f"No details for the {website} exists")
-        else:
-            messagebox.showinfo(title=website, message=f"Email: "
-                                                       f"{email}\nPassword: {password}")
-        finally:
-            website_entry.delete(0, END)
-            password_entry.delete(0, END)
-    elif len(website) <= 3:
-        messagebox.showerror(title="Error",
-                             message="Website is not defined"
-                                     "\nTry again")'''
     try:
         with open("data.json", mode="r") as data_file:
             data = json.load(data_file)
